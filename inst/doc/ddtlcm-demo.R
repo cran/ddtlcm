@@ -18,9 +18,10 @@ knit_hooks$set(output = function(x, options) {
   }
   hook_output(x, options)
 })
+options(warn = -1)
 
 ## ----eval=FALSE, include=FALSE------------------------------------------------
-#  install.packages("/Users/mengbing/Dropbox (University of Michigan)/from_box/research/R_packages/ddtlcm_0.1.1.tar.gz", repos = NULL, type="source")
+#  install.packages("/Users/mengbing/Dropbox (University of Michigan)/from_box/research/R_packages/ddtlcm_0.1.2.tar.gz", repos = NULL, type="source")
 
 ## ----eval=FALSE---------------------------------------------------------------
 #  install.packages("devtools",repos="https://cloud.r-project.org")
@@ -29,9 +30,9 @@ knit_hooks$set(output = function(x, options) {
 ## -----------------------------------------------------------------------------
 library(ddtlcm)
 # load the MAP tree structure obtained from the real HCHS/SOL data
-data(data_hchs)
+data(parameter_diet)
 # unlist the elements into variables in the global environment
-list2env(setNames(data_hchs, names(data_hchs)), envir = globalenv()) 
+list2env(setNames(parameter_diet, names(parameter_diet)), envir = globalenv()) 
 
 # look at items in group 1
 g <- 1
@@ -63,12 +64,18 @@ plot_tree_with_heatmap(tree_with_parameter, response_prob, item_membership_list)
 set.seed(999)
 # number of latent classes, or number of leaves on the tree
 K <- 6
+suppressWarnings({ 
 system.time({
   result <- ddtlcm_fit(K = K, data = response_matrix, 
                      item_membership_list = item_membership_list, total_iters = 100)
 })
-
+})
 print(result)
+# result$tree_samples$tree_list
+
+## ----fig.width=6, fig.height=6------------------------------------------------
+par(mfrow = c(2,2))
+plot(x = result, parameter_names = c("responseprob_1,1,1", "classprob_1", "c", "diffusionvar_1"), burnin = 50)
 
 ## -----------------------------------------------------------------------------
 burnin <- 50

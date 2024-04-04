@@ -20,25 +20,24 @@
 #'
 #' @docType data
 #' @keywords datasets
-#' @name data_hchs
-#' @usage data(data_hchs)
+#' @name parameter_diet
+#' @usage data(parameter_diet)
 #' @references \url{https://arxiv.org/abs/2306.04700}
-"data_hchs"
+"parameter_diet"
 
 
 #' Result of fitting DDT-LCM to a semi-synthetic data example
 #'
 #' This is a "ddtlcm" object obtained from running `ddtlcm_fit` to a semi-synthetic dataset with
-#'  100 posterior samples (for the sake of time). See \code{\link{ddtlcm_fit}} for description of 
+#'  1000 posterior samples (for the sake of time). See \code{\link{ddtlcm_fit}} for description of 
 #'  the object.
 #'
 #' @docType data
 #' @keywords datasets
-#' @name result_hchs
-#' @usage data(result_hchs)
+#' @name result_diet_1000iters
+#' @usage data(result_diet_1000iters)
 #' @format A list with 8 elements
-"result_hchs"
-
+"result_diet_1000iters"
 
 
 #' Synthetic data example
